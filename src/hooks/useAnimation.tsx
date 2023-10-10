@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { Animated, Easing } from 'react-native';
 
 export const useAnimation = () => {
@@ -31,7 +31,7 @@ export const useAnimation = () => {
       toValue: 0,
       duration, //700
       useNativeDriver: true,
-      //easing: Easing.bounce,
+      easing: Easing.bounce,
     }).start();
   };
 
