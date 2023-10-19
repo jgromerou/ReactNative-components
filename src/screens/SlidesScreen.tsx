@@ -1,15 +1,20 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import {
   View,
   ImageSourcePropType,
   SafeAreaView,
   Text,
   Dimensions,
+  TouchableOpacity,
+  Animated,
 } from 'react-native';
-import Carousel from 'react-native-new-snap-carousel';
+import Carousel, { Pagination } from 'react-native-new-snap-carousel';
 import { Image, StyleSheet } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
+import { useAnimation } from '../hooks/useAnimation';
+import { StackScreenProps } from '@react-navigation/stack';
 
-const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
+const { width: screenWidth } = Dimensions.get('window');
 
 interface Slide {
   title: string;
@@ -35,7 +40,14 @@ const items: Slide[] = [
   },
 ];
 
-export const SlidesScreen = () => {
+interface Props extends StackScreenProps<any, any> {}
+
+export const SlidesScreen = ({ navigation }: Props) => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const { opacity, fadeIn } = useAnimation();
+
+  const isVisible = useRef(false);
+
   const renderItem = (item: Slide) => {
     // return <Text>{item.desc}</Text>;
     return (
@@ -75,11 +87,78 @@ export const SlidesScreen = () => {
         //   this._carousel = c;
         // }}
         data={items}
-        renderItem={({ item }) => renderItem(item)}
+        renderItem={({ item }: any) => renderItem(item)}
         sliderWidth={screenWidth}
         itemWidth={screenWidth}
         layout="default"
+        onSnapItem={(index: any) => {
+          setActiveIndex(index);
+          if (index === 2) {
+            isVisible.current = true;
+            fadeIn();
+          }
+        }}
       />
+
+      <View
+        style={{
+          backgroundColor: 'red',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          marginHorizontal: 20,
+          alignItems: 'center',
+        }}
+      >
+        <Pagination
+          dotsLength={items.length}
+          activeDotIndex={activeIndex}
+          dotStyle={{
+            width: 10,
+            height: 10,
+            borderRadius: 5,
+            backgroundColor: '#5856D6',
+          }}
+        />
+      </View>
+
+      {/* Se lo agrega al TouchableOpacity dentro de Animated para que funcione el opacity del useAnimation  */}
+
+      {isVisible && (
+        <Animated.View
+          style={{
+            opacity,
+          }}
+        >
+          <TouchableOpacity
+            style={{
+              flexDirection: 'row',
+              backgroundColor: '#5856D6',
+              width: 140,
+              height: 50,
+              borderRadius: 10,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+            activeOpacity={0.7}
+            onPress={() => {
+              if (isVisible.current) {
+                console.log('Navegar...');
+                navigation.navigate('HomeScreen');
+              }
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 25,
+                color: 'white',
+              }}
+            >
+              Entrar
+            </Text>
+            <Icon name="chevron-forward-outline" color="white" size={30} />
+          </TouchableOpacity>
+        </Animated.View>
+      )}
     </SafeAreaView>
   );
 };
