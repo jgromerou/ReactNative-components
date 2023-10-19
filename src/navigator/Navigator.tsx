@@ -9,6 +9,7 @@ import { PullToRefresh } from '../screens/PullToRefresh';
 import { CustomSectionListScreen } from '../screens/CustomSectionListScreen';
 import { ModalScreen } from '../screens/ModalScreen';
 import { InfiniteScrollScreen } from '../screens/InfiniteScrollScreen';
+import { ChangeThemeScreen } from '../screens/ChangeThemeScreen';
 
 const Stack = createStackNavigator();
 
@@ -18,7 +19,7 @@ export const Navigator = () => {
       screenOptions={{
         headerShown: false,
         cardStyle: {
-          backgroundColor: 'white',
+          // backgroundColor: 'white',
         },
       }}
     >
@@ -29,9 +30,19 @@ export const Navigator = () => {
       <Stack.Screen name="AlertScreen" component={AlertScreen} />
       <Stack.Screen name="TextInputScreen" component={TextInputScreen} />
       <Stack.Screen name="PullToRefreshScreen" component={PullToRefresh} />
-      <Stack.Screen name="CustomSectionListScreen" component={CustomSectionListScreen} />
+      <Stack.Screen
+        name="CustomSectionListScreen"
+        component={CustomSectionListScreen}
+      />
       <Stack.Screen name="ModalScreen" component={ModalScreen} />
-      <Stack.Screen name="InfiniteScrollScreen" component={InfiniteScrollScreen} />
+      <Stack.Screen
+        name="InfiniteScrollScreen"
+        component={InfiniteScrollScreen}
+      />
+      <Stack.Screen
+        name="ChangeThemeScreen"
+        component={ChangeThemeScreen}
+      />
     </Stack.Navigator>
   );
 };
