@@ -1,6 +1,6 @@
 // import { ThemeReducer, lightTheme } from '../reducer/ThemeReducer';
-import React, { useEffect } from 'react';
-import { AppState, Appearance } from 'react-native';
+import React from 'react';
+// import { AppState, Appearance } from 'react-native';
 import { ThemeContext } from '../context/ThemeContext';
 
 export const ThemeProvider = ({ children }: any) => {

@@ -1,6 +1,8 @@
 import { Theme } from '@react-navigation/native';
 
-type ThemeAction = { type: 'set_light_theme' } | { type: 'set_dark_theme' };
+type ThemeAction =  
+    | { type: 'set_light_theme' } 
+    | { type: 'set_dark_theme' };
 
 export interface ThemeState extends Theme {
   currentTheme: 'light' | 'dark';
