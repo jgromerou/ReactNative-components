@@ -44,7 +44,7 @@ interface Props extends StackScreenProps<any, any> {}
 
 export const SlidesScreen = ({ navigation }: Props) => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const { opacity, fadeIn } = useAnimation();
+  const { opacity, fadeIn, fadeOut } = useAnimation();
 
   const isVisible = useRef(false);
 
@@ -78,7 +78,6 @@ export const SlidesScreen = ({ navigation }: Props) => {
     <SafeAreaView
       style={{
         flex: 1,
-        backgroundColor: 'red',
         paddingTop: 50,
       }}
     >
@@ -91,18 +90,20 @@ export const SlidesScreen = ({ navigation }: Props) => {
         sliderWidth={screenWidth}
         itemWidth={screenWidth}
         layout="default"
-        onSnapItem={(index: any) => {
+        onSnapToItem={(index: any) => {
           setActiveIndex(index);
           if (index === 2) {
             isVisible.current = true;
             fadeIn();
+          } else {
+            isVisible.current = false;
+            fadeOut();
           }
         }}
       />
 
       <View
         style={{
-          backgroundColor: 'red',
           flexDirection: 'row',
           justifyContent: 'space-between',
           marginHorizontal: 20,
@@ -119,46 +120,46 @@ export const SlidesScreen = ({ navigation }: Props) => {
             backgroundColor: '#5856D6',
           }}
         />
-      </View>
 
-      {/* Se lo agrega al TouchableOpacity dentro de Animated para que funcione el opacity del useAnimation  */}
+        {/* Se lo agrega al TouchableOpacity dentro de Animated para que funcione el opacity del useAnimation  */}
 
-      {isVisible && (
-        <Animated.View
-          style={{
-            opacity,
-          }}
-        >
-          <TouchableOpacity
+        {isVisible.current && (
+          <Animated.View
             style={{
-              flexDirection: 'row',
-              backgroundColor: '#5856D6',
-              width: 140,
-              height: 50,
-              borderRadius: 10,
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-            activeOpacity={0.7}
-            onPress={() => {
-              if (isVisible.current) {
-                console.log('Navegar...');
-                navigation.navigate('HomeScreen');
-              }
+              opacity,
             }}
           >
-            <Text
+            <TouchableOpacity
               style={{
-                fontSize: 25,
-                color: 'white',
+                flexDirection: 'row',
+                backgroundColor: '#5856D6',
+                width: 140,
+                height: 50,
+                borderRadius: 10,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+              activeOpacity={0.8}
+              onPress={() => {
+                if (isVisible.current) {
+                  console.log('Navegar...');
+                  navigation.navigate('HomeScreen');
+                }
               }}
             >
-              Entrar
-            </Text>
-            <Icon name="chevron-forward-outline" color="white" size={30} />
-          </TouchableOpacity>
-        </Animated.View>
-      )}
+              <Text
+                style={{
+                  fontSize: 25,
+                  color: 'white',
+                }}
+              >
+                Entrar
+              </Text>
+              <Icon name="chevron-forward-outline" color="white" size={30} />
+            </TouchableOpacity>
+          </Animated.View>
+        )}
+      </View>
     </SafeAreaView>
   );
 };

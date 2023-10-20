@@ -16,7 +16,7 @@ export const useAnimation = () => {
   const fadeOut = () => {
     Animated.timing(opacity, {
       toValue: 0,
-      duration: 3000,
+      duration: 300,
       useNativeDriver: true,
     }).start(() => console.log('Animación terminó'));
   };
