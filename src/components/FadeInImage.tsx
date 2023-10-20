@@ -32,11 +32,10 @@ export const FadeInImage = ({ uri, style }: Props) => {
       )}
       <Animated.Image
         source={{ uri }}
-        //TODO: Probar con el comentado primero.
         // onLoadEnd={() => fadeIn()}
         onLoadEnd={() => finishLoading()}
         style={{
-          ...style as any,
+          ...(style as any),
           opacity,
         }}
         // style={{

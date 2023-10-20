@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, ActivityIndicator } from 'react-native';
 import { HeaderTitle } from '../components/HeaderTitle';
 import { FlatList } from 'react-native-gesture-handler';
-import { FadeInImage } from './FadeInImage';
+import { FadeInImage } from '../components/FadeInImage';
 
 export const InfiniteScrollScreen = () => {
   const [numbers, setNumbers] = useState([0, 1, 2, 3, 4, 5]);
@@ -10,7 +10,7 @@ export const InfiniteScrollScreen = () => {
   const loadMore = () => {
     const newArray: number[] = [];
     for (let i = 0; i < 5; i++) {
-      newArray[i] = numbers.length + 1;
+      newArray[i] = numbers.length + i;
     }
 
     setTimeout(() => {
@@ -20,38 +20,35 @@ export const InfiniteScrollScreen = () => {
 
   const renderItem = (item: number) => {
     return (
-      //TODO: Probar con la imagen animada tercero.
       <FadeInImage
-        uri={`https://fastly.picsum.photos/id/${item}/500/400`}
+        uri={`https://picsum.photos/id/${item}/500/400`}
         style={{
           width: '100%',
           height: 400,
-          borderRadius: 10,
         }}
       />
     );
 
-    //TODO: Probar con el texto primero
     // return <Text style={styles.textItem}>{item}</Text>;
-    //TODO: Probar con la imagen segundo
+
     // return (
-    // <Image
-    //   source={{ uri: `https://fastly.picsum.photos/id/${item}/500/400` }}
-    //   style={{
-    //     width: '100%',
-    //     height: 400,
-    //   }}
-    // />
-    //);
+    //   <Image
+    //     source={{ uri: `https://picsum.photos/id/${item}/500/400` }}
+    //     style={{
+    //       width: '100%',
+    //       height: 400,
+    //     }}
+    //   />
+    // );
   };
   return (
-    <View style={{ flex: 1, backgroundColor: 'red' }}>
+    <View style={{ flex: 1 }}>
       <FlatList
         data={numbers}
         keyExtractor={(item) => item.toString()}
         renderItem={({ item }) => renderItem(item)}
         ListHeaderComponent={
-          <View style={{ marginBottom: 20 }}>
+          <View style={{ marginHorizontal: 20 }}>
             <HeaderTitle title="Infinite Scroll" />
           </View>
         }
