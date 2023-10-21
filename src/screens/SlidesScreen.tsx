@@ -48,7 +48,9 @@ export const SlidesScreen = ({ navigation }: Props) => {
   const { opacity, fadeIn, fadeOut } = useAnimation();
   const isVisible = useRef(false);
 
-  const { theme: {colors} } = useContext(ThemeContext);
+  const {
+    theme: { colors },
+  } = useContext(ThemeContext);
 
   const renderItem = (item: Slide) => {
     // return <Text>{item.desc}</Text>;
@@ -56,7 +58,7 @@ export const SlidesScreen = ({ navigation }: Props) => {
       <View
         style={{
           flex: 1,
-          backgroundColor: colors.background,  //o dejarlo en blanco por la apariencia
+          backgroundColor: colors.background, //o dejarlo en blanco por la apariencia
           borderRadius: 5,
           padding: 40,
           justifyContent: 'center',
@@ -70,8 +72,10 @@ export const SlidesScreen = ({ navigation }: Props) => {
             resizeMode: 'center',
           }}
         />
-        <Text style={{...styles.title, color: colors.primary}}>{item.title}</Text>
-        <Text style={{...styles.title, color: colors.text}}>{item.desc}</Text>
+        <Text style={{ ...styles.title, color: colors.primary }}>
+          {item.title}
+        </Text>
+        <Text style={{ ...styles.title, color: colors.text }}>{item.desc}</Text>
       </View>
     );
   };
@@ -144,7 +148,7 @@ export const SlidesScreen = ({ navigation }: Props) => {
               activeOpacity={0.8}
               onPress={() => {
                 if (isVisible.current) {
-                  console.log('Navegar...');
+                  //console.log('Navegar...');
                   navigation.navigate('HomeScreen');
                 }
               }}
