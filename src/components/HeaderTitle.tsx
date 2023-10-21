@@ -11,10 +11,10 @@ interface Props {
 
 export const HeaderTitle = ({ title, color = '#000' }: Props) => {
   const { top } = useSafeAreaInsets();
-  const { theme, setDarkTheme, setLightTheme } = useContext(ThemeContext);
+  const { theme: {colors}, setDarkTheme, setLightTheme } = useContext(ThemeContext);
   return (
     <View style={{ marginTop: top + 20, marginBottom: 20 }}>
-      <Text style={{ ...styles.title, color }}>{title}</Text>
+      <Text style={{ ...styles.title, color: colors.text }}>{title}</Text>
     </View>
   );
 };

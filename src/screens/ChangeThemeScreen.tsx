@@ -5,7 +5,7 @@ import { styles } from '../theme/appTheme';
 import { ThemeContext } from '../context/ThemeContext';
 
 export const ChangeThemeScreen = () => {
-  const { theme, setDarkTheme, setLightTheme } = useContext(ThemeContext);
+  const { theme: {colors}, setDarkTheme, setLightTheme } = useContext(ThemeContext);
 
   return (
     <View style={styles.globalMargin}>
@@ -18,7 +18,7 @@ export const ChangeThemeScreen = () => {
             width: 150,
             height: 50,
             borderRadius: 20,
-            backgroundColor: '#5856D6', //TODO: colors.primary
+            backgroundColor: colors.primary, 
             justifyContent: 'center',
           }}
         >
@@ -34,7 +34,7 @@ export const ChangeThemeScreen = () => {
             width: 150,
             height: 50,
             borderRadius: 20,
-            backgroundColor: '#5856D6',
+            backgroundColor: colors.primary,
             justifyContent: 'center',
           }}
         >

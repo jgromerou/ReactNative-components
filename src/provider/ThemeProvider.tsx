@@ -1,11 +1,12 @@
 // import { ThemeReducer, lightTheme } from '../reducer/ThemeReducer';
-import React from 'react';
+import React, {useReducer} from 'react';
 // import { AppState, Appearance } from 'react-native';
 import { ThemeContext } from '../context/ThemeContext';
+import { ThemeReducer, darkTheme, lightTheme } from '../reducer/ThemeReducer';
 
 export const ThemeProvider = ({ children }: any) => {
   //const colorScheme = useColorScheme();
-  //   const [theme, dispatch] = useReducer(ThemeReducer, lightTheme); //TODO: Leer el tema global del celular hacer el ternario con el darkTheme y el lightTheme..
+  const [theme, dispatch] = useReducer(ThemeReducer, lightTheme); //TODO: Leer el tema global del celular hacer el ternario con el darkTheme y el lightTheme..
 
   //Todo: este permite cambiar el theme segun el Sistema operativo
   // useEffect(() => {
@@ -22,15 +23,13 @@ export const ThemeProvider = ({ children }: any) => {
   //   colorScheme === 'light' ? setLightTheme : setDarkTheme;
   // }, [colorScheme]);
 
-  const theme = {};
-
   const setDarkTheme = () => {
-    //dispatch({ type: 'set_dark_theme' });
+    dispatch({ type: 'set_dark_theme' });
     console.log('setDarkTheme');
   };
 
   const setLightTheme = () => {
-    //dispatch({ type: 'set_light_theme' });
+    dispatch({ type: 'set_light_theme' });
     console.log('setLightTheme');
   };
 

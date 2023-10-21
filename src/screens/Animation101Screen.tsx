@@ -16,6 +16,7 @@ export const Animation101Screen = () => {
       <Animated.View
         style={{
           ...styles.purpleBox,
+          backgroundColor: colors.primary,
           marginBottom: 20,
           opacity: opacity,
           // top: heightBox,
@@ -32,13 +33,13 @@ export const Animation101Screen = () => {
           fadeIn();
           startMovingPosition(-150);
         }}
-        //color={colors.primary}
+        color={colors.primary}
       />
 
       <Button
         title="Fade Out"
         onPress={fadeOut}
-        //color={colors.primary}
+        color={colors.primary}
       />
     </View>
   );
@@ -51,7 +52,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   purpleBox: {
-    backgroundColor: '#5856D6',
+    //backgroundColor: '#5856D6',
     width: 150,
     height: 150,
   },

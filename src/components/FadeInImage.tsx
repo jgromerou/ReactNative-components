@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {
   View,
   Animated,
@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import { useAnimation } from '../hooks/useAnimation';
 import { useState } from 'react';
+import { ThemeContext } from '../context/ThemeContext';
 
 interface Props {
   uri: string;
@@ -18,6 +19,8 @@ export const FadeInImage = ({ uri, style }: Props) => {
   const { opacity, fadeIn } = useAnimation();
   const [isLoading, setIsLoading] = useState(true);
 
+  const { theme: {colors, dividerColor} } = useContext(ThemeContext);
+
   const finishLoading = () => {
     setIsLoading(false), fadeIn();
   };
@@ -27,7 +30,7 @@ export const FadeInImage = ({ uri, style }: Props) => {
         <ActivityIndicator
           style={{ position: 'absolute' }}
           size={30}
-          color="#5856D6"
+          color={colors.primary}
         />
       )}
       <Animated.Image
