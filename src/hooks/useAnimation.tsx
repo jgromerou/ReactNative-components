@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { Animated, Easing } from 'react-native';
 
 export const useAnimation = () => {
@@ -16,7 +16,7 @@ export const useAnimation = () => {
   const fadeOut = () => {
     Animated.timing(opacity, {
       toValue: 0,
-      duration: 3000,
+      duration: 300,
       useNativeDriver: true,
     }).start(() => console.log('Animación terminó'));
   };
@@ -31,7 +31,7 @@ export const useAnimation = () => {
       toValue: 0,
       duration, //700
       useNativeDriver: true,
-      //easing: Easing.bounce,
+      easing: Easing.bounce,
     }).start();
   };
 

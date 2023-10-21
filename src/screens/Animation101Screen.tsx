@@ -1,51 +1,46 @@
-import { useRef } from 'react';
-import { View, StyleSheet, Animated, Button, Easing } from 'react-native';
+import { useContext } from 'react';
+import { View, StyleSheet, Animated, Button } from 'react-native';
+import { useAnimation } from '../hooks/useAnimation';
+import { ThemeContext } from '../context/ThemeContext';
 
 export const Animation101Screen = () => {
-  const opacity = useRef(new Animated.Value(0)).current;
-  const heightBox = useRef(new Animated.Value(-100)).current;
+  const { opacity, position, fadeIn, fadeOut, startMovingPosition } =
+    useAnimation();
 
-  const fadeIn = () => {
-    Animated.timing(opacity, {
-      toValue: 1,
-      duration: 300,
-      useNativeDriver: true,
-    }).start();
-
-    Animated.timing(heightBox, {
-      toValue: 0,
-      duration: 2000, //700
-      useNativeDriver: true,
-      easing: Easing.bounce,
-    }).start();
-  };
-
-  const fadeOut = () => {
-    Animated.timing(opacity, {
-      toValue: 0,
-      duration: 3000,
-      useNativeDriver: true,
-    }).start(() => console.log('Animación terminó'));
-  };
+  const {
+    theme: { colors },
+  } = useContext(ThemeContext);
 
   return (
     <View style={styles.container}>
       <Animated.View
         style={{
           ...styles.purpleBox,
+          backgroundColor: colors.primary,
           marginBottom: 20,
           opacity: opacity,
           // top: heightBox,
           transform: [
             {
-              translateY: heightBox,
+              translateY: position,
             },
           ],
         }}
       />
-      <Button title="Fade In" onPress={fadeIn} />
+      <Button
+        title="Fade In"
+        onPress={() => {
+          fadeIn();
+          startMovingPosition(-150);
+        }}
+        color={colors.primary}
+      />
 
-      <Button title="Fade Out" onPress={fadeOut} />
+      <Button
+        title="Fade Out"
+        onPress={fadeOut}
+        color={colors.primary}
+      />
     </View>
   );
 };
@@ -57,7 +52,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   purpleBox: {
-    backgroundColor: '#5856D6',
+    //backgroundColor: '#5856D6',
     width: 150,
     height: 150,
   },
